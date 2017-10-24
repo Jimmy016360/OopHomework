@@ -8,7 +8,7 @@ namespace MyBackup
     /// <summary>
     /// 排程設定管理器
     /// </summary>
-    public class ScheduleManager
+    public class ScheduleManager : JsonManager
     {
         /// <summary>
         /// 排程設定檔名
@@ -41,18 +41,10 @@ namespace MyBackup
         /// <summary>
         /// 排程設定檔轉換方法
         /// </summary>
-        public void ProcessSchedules()
+        public override void ProcessJsonConfig()
         {
-            if (File.Exists(scheduleFileName) == false)
-            {
-                return;
-            }
-
-            // Parse json file
-            JObject jObject = JObject.Parse(File.ReadAllText(scheduleFileName));
-
             // Cast json object to dynamic type
-            dynamic dyObject = (dynamic)jObject;
+            dynamic dyObject = this.GetJsonObject(scheduleFileName);
 
             // Get array of configs
             List<dynamic> dynSchedules = ((JArray)dyObject["schedules"]).Cast<dynamic>().ToList();

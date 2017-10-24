@@ -8,7 +8,7 @@ namespace MyBackup
     /// <summary>
     /// 檔案處理管理器
     /// </summary>
-    public class ConfigManager
+    public class ConfigManager : JsonManager
     {
         /// <summary>
         /// 檔案處理清單
@@ -41,18 +41,10 @@ namespace MyBackup
         /// <summary>
         /// 檔案處理設定檔轉換方法
         /// </summary>
-        public void ProcessConfigs()
+        public override void ProcessJsonConfig()
         {
-            if (File.Exists(configFileName) == false)
-            {
-                return;
-            }
-
-            // Parse json file
-            JObject jObject = JObject.Parse(File.ReadAllText(configFileName));
-
             // Cast json object to dynamic type
-            dynamic dyObject = (dynamic)jObject;
+            dynamic dyObject = this.GetJsonObject(configFileName);
 
             // Get array of configs
             List<dynamic> dynConfigs = ((JArray)dyObject["configs"]).Cast<dynamic>().ToList();
@@ -70,6 +62,7 @@ namespace MyBackup
                                                                             (string)x["connectionString"]));
 
             configs.AddRange(configModels);
+        
         }
     }
 }
