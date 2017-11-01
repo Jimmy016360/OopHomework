@@ -59,8 +59,10 @@ namespace MyBackup
 
         private List<IHandler> FindHandlers(Candidate candidate)
         {
-            List<IHandler> handlers = new List<IHandler>();
-            handlers.Add(HandlerFactory.Create("file"));
+            List<IHandler> handlers = new List<IHandler>
+            {
+                HandlerFactory.Create("file")
+            };
 
             foreach (string handler in candidate.Config.Handlers){
                 handlers.Add(HandlerFactory.Create(handler));
