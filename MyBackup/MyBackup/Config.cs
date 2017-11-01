@@ -12,7 +12,7 @@
 
         private bool remove;
 
-        private string handler;
+        private string[] handlers;
 
         private string destination;
 
@@ -20,14 +20,14 @@
 
         private string connectionString;
 
-        public Config(string ext, string location, bool subDirectory, string unit, bool remove, string handler, string destination, string dir, string connectionString)
+        public Config(string ext, string location, bool subDirectory, string unit, bool remove, string[] handlers, string destination, string dir, string connectionString)
         {
             this.ext = ext;
             this.location = location;
             this.subDirectory = subDirectory;
             this.unit = unit;
             this.remove = remove;
-            this.handler = handler;
+            this.handlers = handlers;
             this.destination = destination;
             this.dir = dir;
             this.connectionString = connectionString;
@@ -58,9 +58,9 @@
             get { return this.remove; }
         }
 
-        public string Handler
+        public string[] Handlers
         {
-            get { return this.handler; }
+            get { return this.handlers; }
         }
 
         public string Destination

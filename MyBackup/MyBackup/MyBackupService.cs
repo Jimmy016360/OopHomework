@@ -32,5 +32,42 @@ namespace MyBackup
         {
             managers.ForEach(x => x.ProcessJsonConfig());
         }
+
+        public void DoBackup()
+        {
+            List<Candidate> candidates = this.FindFiles();
+            foreach (Candidate candidate in candidates)
+            {
+                this.BroadcastToHanders(candidate);
+            }
+        }
+
+        private void BroadcastToHanders(Candidate candidate)
+        {
+            List<IHandler> handlers = this.FindHandlers(candidate);
+            byte[] target = null;
+            foreach (IHandler handler in handlers)
+            {
+                target = handler.Perform(candidate, target);
+            }
+        }
+        private List<Candidate> FindFiles()
+        {
+            // TODO: Homework 4
+            throw new NotImplementedException();
+        }
+
+        private List<IHandler> FindHandlers(Candidate candidate)
+        {
+            List<IHandler> handlers = new List<IHandler>();
+            handlers.Add(HandlerFactory.Create("file"));
+
+            foreach (string handler in candidate.Config.Handlers){
+                handlers.Add(HandlerFactory.Create(handler));
+            }
+
+            handlers.Add(HandlerFactory.Create(candidate.Config.Destination));
+            return handlers;
+        }
     }
 }

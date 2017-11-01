@@ -56,7 +56,7 @@ namespace MyBackup
                                                                             (bool)x["subDirectory"],
                                                                             (string)x["unit"],
                                                                             (bool)x["remove"],
-                                                                            (string)x["handler"],
+                                                                            ((JArray)x["handlers"]).ToObject<string[]>(),
                                                                             (string)x["destination"],
                                                                             (string)x["dir"],
                                                                             (string)x["connectionString"]));
