@@ -36,10 +36,7 @@ namespace MyBackup
         public void DoBackup()
         {
             List<Candidate> candidates = this.FindFiles();
-            foreach (Candidate candidate in candidates)
-            {
-                this.BroadcastToHanders(candidate);
-            }
+            candidates.ForEach(this.BroadcastToHanders);
         }
 
         private void BroadcastToHanders(Candidate candidate)
