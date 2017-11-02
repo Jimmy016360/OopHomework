@@ -10,7 +10,6 @@ namespace MyBackup
         {
             MyBackupService backupService = new MyBackupService();
             backupService.ProcessJsonConfigs();
-            
 
             Console.ReadKey();
         }
