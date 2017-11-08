@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MyBackup
 {
@@ -35,11 +31,18 @@ namespace MyBackup
 
         public void DoBackup()
         {
-            List<Candidate> candidates = this.FindFiles();
-            candidates.ForEach(this.BroadcastToHanders);
+            ConfigManager configManager = (managers[0] as ConfigManager);
+            foreach (var config in configManager.configs)
+            {
+                IFileFinder fileFinder = FileFinderFactory.Create("file", config);
+                foreach (Candidate candidate in fileFinder)
+                {
+                    this.BroadcastToHandlers(candidate);
+                }
+            }
         }
 
-        private void BroadcastToHanders(Candidate candidate)
+        private void BroadcastToHandlers(Candidate candidate)
         {
             List<IHandler> handlers = this.FindHandlers(candidate);
             byte[] target = null;
@@ -47,11 +50,6 @@ namespace MyBackup
             {
                 target = handler.Perform(candidate, target);
             }
-        }
-        private List<Candidate> FindFiles()
-        {
-            // TODO: Homework 4
-            throw new NotImplementedException();
         }
 
         private List<IHandler> FindHandlers(Candidate candidate)
@@ -61,7 +59,8 @@ namespace MyBackup
                 HandlerFactory.Create("file")
             };
 
-            foreach (string handler in candidate.Config.Handlers){
+            foreach (string handler in candidate.Config.Handlers)
+            {
                 handlers.Add(HandlerFactory.Create(handler));
             }
 
