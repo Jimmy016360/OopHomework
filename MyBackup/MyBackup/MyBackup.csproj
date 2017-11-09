@@ -45,11 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractFileFinder.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="EncodeHandler.cs" />
+    <Compile Include="FileFinderFactory.cs" />
     <Compile Include="IFileFinder.cs" />
     <Compile Include="JsonManager.cs" />
+    <Compile Include="LocalFileFinder.cs" />
     <Compile Include="MyBackupService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
