@@ -2,11 +2,11 @@
   "configs": [
     {
       "ext": "cs",
-      "location": "c:\\Projects",
+      "location": "C:\\MyBackup",
       "subDirectory": true,
       "unit": "file",
       "remove": false,
-      "handlers": ["zip"],
+      "handlers": [ "zip" ],
       "destination": "directory",
       "dir": "c:\\MyArchieves",
       "connectionString": ""
