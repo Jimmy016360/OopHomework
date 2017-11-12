@@ -56,11 +56,11 @@ namespace MyBackup
         /// <param name="candidate">Candidate.</param>
         private byte[] ConvertFileToByteArray(Candidate candidate)
         {
-            if (File.Exists(candidate.Name) == false) {
+            if (File.Exists(candidate.ProcessName) == false) {
                 throw new FileNotFoundException();
             }
 
-            return File.ReadAllBytes(candidate.Name);
+            return File.ReadAllBytes(candidate.ProcessName);
 
         }
     }

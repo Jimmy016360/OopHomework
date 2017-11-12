@@ -36,7 +36,8 @@ namespace MyBackup
         protected override Candidate CreateCandidate(string fileName)
         {
             Candidate candidate = new Candidate(this.config);
-            candidate.Name = fileName;
+            candidate.ProcessName = fileName;
+            candidate.Name = Path.GetFileName(fileName);
             return candidate;
         }
 
