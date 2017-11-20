@@ -1,6 +1,7 @@
 ﻿using System;
+using MyBackup;
 
-namespace MyBackup
+namespace MyBackupCandidate
 {
     /// <summary>
     /// Candidate.
@@ -10,35 +11,44 @@ namespace MyBackup
         /// <summary>
         /// The config.
         /// </summary>
-        private Config config;
+        private readonly Config config;
 
         /// <summary>
         /// The file data time.
         /// </summary>
-        private string fileDataTime;
+        private readonly DateTime fileDataTime;
 
         /// <summary>
         /// The name.
         /// </summary>
-        private string name;
+        private readonly string name;
 
         /// <summary>
         /// The name of the process.
         /// </summary>
-        private string processName;
+        private readonly string processName;
 
         /// <summary>
         /// The size.
         /// </summary>
-        private string size;
+        private readonly long size;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="config">Config.</param>
-        public Candidate(Config config)
+        internal Candidate(
+            Config config, 
+            string name, 
+            DateTime fileDataTime,
+            long size,
+            string processName)
         {
             this.config = config;
+            this.name = name;
+            this.processName = processName;
+            this.size = size;
+            this.fileDataTime = fileDataTime;
         }
 
         /// <summary>
@@ -54,10 +64,9 @@ namespace MyBackup
         /// Gets or sets the file date time.
         /// </summary>
         /// <value>The file date time.</value>
-        public string FileDateTime
+        public DateTime FileDateTime
         {
             get => this.fileDataTime;
-            set => this.fileDataTime = value;
         }
 
         /// <summary>
@@ -67,7 +76,6 @@ namespace MyBackup
         public string Name
         {
             get => this.name;
-            set => this.name = value;
         }
 
         /// <summary>
@@ -77,17 +85,15 @@ namespace MyBackup
         public string ProcessName
         {
             get => this.processName;
-            set => this.processName = value;
         }
 
         /// <summary>
         /// Gets or sets the size.
         /// </summary>
         /// <value>The size.</value>
-        public string Size
+        public long Size
         {
             get => this.size;
-            set => this.size = value;
         }
     }
 }

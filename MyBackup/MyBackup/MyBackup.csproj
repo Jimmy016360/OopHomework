@@ -48,12 +48,10 @@
     <Compile Include="Managers\ConfigManager.cs" />
     <Compile Include="Handlers\DirectoryHandler.cs" />
     <Compile Include="Handlers\EncodeHandler.cs" />
-    <Compile Include="Managers\FileFinderFactory.cs" />
     <Compile Include="Handlers\FileHandler.cs" />
     <Compile Include="Handlers\HandlerFactory.cs" />
     <Compile Include="Interfaces\IFileFinder.cs" />
     <Compile Include="Interfaces\IHandler.cs" />
-    <Compile Include="Managers\JsonManager.cs" />
     <Compile Include="Managers\AbstractFileFinder.cs" />
     <Compile Include="Managers\ScheduleManager.cs" />
     <Compile Include="Managers\LocalFileFinder.cs" />
@@ -66,16 +64,25 @@
     <Compile Include="Models\Candidate.cs" />
     <Compile Include="Handlers\ZipHandler.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Managers\CandidateFactory.cs" />
+    <Compile Include="Managers\TaskFactory.cs" />
+    <Compile Include="Managers\TaskDispatcher.cs" />
+    <Compile Include="Managers\FileFinderFactory.cs" />
+    <Compile Include="Managers\JsonManager.cs" />
+    <Compile Include="Interfaces\ITask.cs" />
+    <Compile Include="Managers\AbstractTask.cs" />
+    <Compile Include="Managers\SimpleleTask.cs" />
+    <Compile Include="Managers\ScheduledTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
     <None Include="schedule.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Managers\packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

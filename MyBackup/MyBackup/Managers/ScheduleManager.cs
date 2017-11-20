@@ -18,7 +18,7 @@ namespace MyBackup
         /// <summary>
         /// 排程設定清單
         /// </summary>
-        private readonly List<Schedule> schedules = new List<Schedule>();
+        public readonly List<Schedule> schedules = new List<Schedule>();
 
         /// <summary>
         /// 排程設定計數

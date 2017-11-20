@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using MyBackupCandidate;
 
 namespace MyBackup
 {
@@ -35,9 +36,20 @@ namespace MyBackup
         /// <returns>Candidate 物件</returns>
         protected override Candidate CreateCandidate(string fileName)
         {
-            Candidate candidate = new Candidate(this.config);
-            candidate.ProcessName = fileName;
-            candidate.Name = Path.GetFileName(fileName);
+            FileInfo fileInfo;
+            Candidate candidate = null;
+
+            if (File.Exists(fileName)) 
+            {
+                fileInfo = new FileInfo(fileName);
+                candidate = CandidateFactory.Create(
+                    this.config, 
+                    Path.GetFileName(fileName), 
+                    fileInfo.CreationTime, 
+                    fileInfo.Length, 
+                    fileName);
+            }
+
             return candidate;
         }
 

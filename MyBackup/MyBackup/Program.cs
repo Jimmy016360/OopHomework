@@ -9,8 +9,10 @@ namespace MyBackup
         private static void Main(string[] args)
         {
             MyBackupService backupService = new MyBackupService();
-            backupService.ProcessJsonConfigs();
-            backupService.DoBackup();
+
+            backupService.SimpleBackup();
+            backupService.ScheduledBackup();
+
             Console.ReadKey();
         }
     }

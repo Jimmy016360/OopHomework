@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MyBackupCandidate;
 
 namespace MyBackup
 {
@@ -13,59 +14,52 @@ namespace MyBackup
         private List<JsonManager> managers = new List<JsonManager>();
 
         /// <summary>
+        /// The task dispatcher.
+        /// </summary>
+        private TaskDispatcher taskDispatcher;
+
+        /// <summary>
         /// Constructor
         /// </summary>
         public MyBackupService()
         {
             managers.Add(new ConfigManager());
             managers.Add(new ScheduleManager());
+
+            this.taskDispatcher = new TaskDispatcher();
+            this.Init();
+        }
+
+        /// <summary>
+        /// Init this instance.
+        /// </summary>
+        private void Init()
+        {
+            this.ProcessJsonConfigs();
         }
 
         /// <summary>
         /// 處理 Json 設定檔
         /// </summary>
-        public void ProcessJsonConfigs()
+        private void ProcessJsonConfigs()
         {
             managers.ForEach(x => x.ProcessJsonConfig());
         }
 
-        public void DoBackup()
+        /// <summary>
+        /// Simples the backup.
+        /// </summary>
+        public void SimpleBackup()
         {
-            ConfigManager configManager = (managers[0] as ConfigManager);
-            foreach (var config in configManager.configs)
-            {
-                IFileFinder fileFinder = FileFinderFactory.Create("file", config);
-                foreach (Candidate candidate in fileFinder)
-                {
-                    this.BroadcastToHandlers(candidate);
-                }
-            }
+            this.taskDispatcher.SimpleTask(managers);
         }
 
-        private void BroadcastToHandlers(Candidate candidate)
-        {
-            List<IHandler> handlers = this.FindHandlers(candidate);
-            byte[] target = null;
-            foreach (IHandler handler in handlers)
-            {
-                target = handler.Perform(candidate, target);
-            }
-        }
-
-        private List<IHandler> FindHandlers(Candidate candidate)
-        {
-            List<IHandler> handlers = new List<IHandler>
-            {
-                HandlerFactory.Create("file")
-            };
-
-            foreach (string handler in candidate.Config.Handlers)
-            {
-                handlers.Add(HandlerFactory.Create(handler));
-            }
-
-            handlers.Add(HandlerFactory.Create(candidate.Config.Destination));
-            return handlers;
+        /// <summary>
+        /// Scheduleds the backup.
+        /// </summary>
+        public void ScheduledBackup()
+{
+            this.taskDispatcher.ScheduledTask(managers);
         }
     }
 }
