@@ -1,0 +1,50 @@
+@startuml MyBackupClassDiagram
+
+class MyBackupService {
+    +SimpleBackup()
+    +ScheduledBackup()
+}
+
+class TaskDispatcher {
+    +SimpleTask()
+    +ScheduledTask()
+}
+
+class TaskFactory {
+    {static} +Create()
+}
+
+interface ITask {
+    +Execute()
+}
+
+abstract class AbstractTask {
+    {abstract} +Execute()
+    #BroadcastToHandlers()
+    -FindHandlers()
+}
+
+class SimpleTask {
+    +Execute()
+}
+
+class ScheduledTask {
+    +Execute()
+}
+
+class CandidateFactory {
+    {static} +Create()
+}
+
+class Candidate {
+
+}
+MyBackupService *-> TaskDispatcher
+TaskDispatcher *-> TaskFactory
+TaskFactory *-> ITask
+ITask <|.. AbstractTask
+AbstractTask <|-- SimpleTask
+AbstractTask <|-- ScheduledTask
+
+CandidateFactory *-> Candidate
+@enduml
