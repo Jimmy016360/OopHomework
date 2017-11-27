@@ -6,7 +6,7 @@
       "subDirectory": true,
       "unit": "file",
       "remove": false,
-      "handlers": [ "zip" ],
+      "handlers": [ "DBAdapter" ],
       "destination": "directory",
       "dir": "c:\\MyArchieves",
       "connectionString": ""

@@ -34,8 +34,8 @@ namespace MyBackup
         /// <param name="target">Target.</param>
         private byte[] CopyToDirectory(Candidate candidate, byte[] target)
         {
-            if (Directory.Exists( candidate.Config.Dir) == false ) {
-                throw new DirectoryNotFoundException();
+            if (Directory.Exists(candidate.Config.Dir) == false ) {
+                Directory.CreateDirectory(candidate.Config.Dir);
             }
 
             string targetPath = Path.Combine(candidate.Config.Dir, candidate.Name);
