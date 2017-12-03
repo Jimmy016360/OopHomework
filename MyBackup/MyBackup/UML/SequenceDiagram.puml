@@ -1,0 +1,17 @@
+@startuml sequence diagram
+
+actor User
+
+User -> MyBackupService : SimpleBackup()
+Create TaskDispatcher
+MyBackupService -->> TaskDispatcher : New
+MyBackupService <<-- TaskDispatcher : TaskDispatcher
+MyBackupService -> TaskDispatcher : SimpleTask()
+
+TaskDispatcher -> TaskFactory : Create()
+Create SimpleTask
+TaskFactory -->> SimpleTask : new 
+TaskDispatcher <<-- SimpleTask : Task
+TaskDispatcher -> SimpleTask : Execute()
+
+@enduml
